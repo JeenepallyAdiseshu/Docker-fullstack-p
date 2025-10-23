@@ -16,7 +16,7 @@ services:
     container_name: springboot-backend
     build:
       context: ./DBackend/expense-backend   # <-- matches your backend path
-      dockerfile: Dockerfile                 # <-- must exist inside the folder
+      dockerfile: ../DFullStack/backend.Dockerfile                # <-- must exist inside the folder
     ports:
       - "2025:2008"
     environment:
@@ -35,7 +35,7 @@ services:
     container_name: react-frontend
     build:
       context: ./DFrontend/Product     # <-- matches your frontend path
-      dockerfile: Dockerfile
+      dockerfile: ../DFullStack/frontend.Dockerfile 
     ports:
       - "5173:80"
     environment:
