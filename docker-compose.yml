@@ -13,10 +13,10 @@ services:
       - expense-net
 
   backend:
-    container_name: springboot-backend
-    build:
-      context: ./DBackend/expense-backend   # <-- matches your backend path
-      dockerfile: backend.Dockerfile                # <-- must exist inside the folder
+  build:
+    context: ./DBackend/expense-backend
+    dockerfile: backend.Dockerfile
+               # <-- must exist inside the folder
     ports:
       - "2025:2008"
     environment:
