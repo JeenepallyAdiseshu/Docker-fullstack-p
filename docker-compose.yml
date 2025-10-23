@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mysqldb:
     container_name: mysql-db
@@ -36,7 +34,7 @@ services:
   frontend:
     container_name: react-frontend
     build:
-      context: ./DFrontend-Product
+      context: ./DFrontend/Product   # <-- updated path
       dockerfile: Dockerfile
     ports:
       - "5173:80"
