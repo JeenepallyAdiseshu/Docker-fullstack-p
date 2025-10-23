@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./ExpenseTracker.css";
 
-const API_URL = "http://localhost:2008/api/expenses";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/expenses`;
 
 const ExpenseTracker = () => {
   const [expenses, setExpenses] = useState([]);
