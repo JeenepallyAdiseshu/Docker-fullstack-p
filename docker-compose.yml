@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    container_name: mysql-db
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: Asha@2006
+      MYSQL_DATABASE: dexpense_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - expense-net
+
+  backend:
+    container_name: springboot-backend
+    build:
+      context: ./DBackend/expense-backend
+      dockerfile: Dockerfile
+    ports:
+      - "2025:2008"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/dexpense_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Asha@2006
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+    depends_on:
+      - mysqldb
+    restart: on-failure
+    networks:
+      - expense-net
+
+  frontend:
+    container_name: react-frontend
+    build:
+      context: ./DFrontend Product
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    environment:
+      VITE_API_URL: http://backend:2008
+    depends_on:
+      - backend
+    networks:
+      - expense-net
+
+volumes:
+  mysql-data:
+
+networks:
+  expense-net:
+    driver: bridge
