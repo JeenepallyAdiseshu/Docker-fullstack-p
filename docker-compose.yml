@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   mysqldb:
     container_name: mysql-db
@@ -13,10 +15,10 @@ services:
       - expense-net
 
   backend:
-  build:
-    context: ./DBackend/expense-backend
-    dockerfile: backend.Dockerfile
-               # <-- must exist inside the folder
+    container_name: springboot-backend
+    build:
+      context: ./DBackend/expense-backend        # backend project folder
+      dockerfile: ../../DFullStack/backend.Dockerfile  # correct relative path
     ports:
       - "2025:2008"
     environment:
@@ -34,8 +36,8 @@ services:
   frontend:
     container_name: react-frontend
     build:
-      context: ./DFrontend/Product     # <-- matches your frontend path
-      dockerfile: frontend.Dockerfile 
+      context: ./DFrontend/Product               # frontend project folder
+      dockerfile: ../../DFullStack/frontend.Dockerfile  # correct relative path
     ports:
       - "5173:80"
     environment:
